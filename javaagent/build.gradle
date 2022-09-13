@@ -25,7 +25,8 @@ dependencies {
 
 // Download the OpenTelemetry java agent and put it in the build directory
 task downloadAgent(type: Download) {
-    src "https://github.com/open-telemetry/opentelemetry-java-instrumentation/releases/download/v${otelVersion}/opentelemetry-javaagent.jar"
+    //src "https://github.com/open-telemetry/opentelemetry-java-instrumentation/releases/download/v${otelVersion}/opentelemetry-javaagent.jar"
+    src "https://github.com/aws-observability/aws-otel-java-instrumentation/releases/latest/download/aws-opentelemetry-agent.jar"
     dest project.buildDir.toString() + "/otel/opentelemetry-javaagent.jar"
     overwrite true
 }

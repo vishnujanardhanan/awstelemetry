@@ -2,17 +2,21 @@ receivers:
   otlp:
     protocols:
       grpc:
+        endpoint: http://gateway.docker.internal:4317
+      http:
+        endpoint: http://gateway.docker.internal:4318
+# Data Prepper Collector configuration
 exporters:
-  logging:
-    logLevel: DEBUG
+  otlp/data-prepper:
+     # Port 21890 is the default port exposed by Data Prepper.
+    endpoint: http://gateway.docker.internal:21890
+    insecure: true
+
 service:
   pipelines:
-    metrics:
-      receivers: [otlp]
-      exporters: [logging]
     traces:
       receivers: [otlp]
-      exporters: [logging]
-    logs:
+      exporters: [otlp/data-prepper]
+    metrics:
       receivers: [otlp]
-      exporters: [logging]
+      exporters: [otlp/data-prepper]
